@@ -4,29 +4,29 @@
 int arr[SIZE],front=-1,rear=-1;
 struct prior
 {
-int data;
-int priority;
+ int data;
+ int priority;
 }s[SIZE];
 void enqueue()
 {
-int i;
-int k=0;
-printf("enter the element\n");
-scanf("%d",&s[k].data);
-printf("enter the priority\n");
-scanf("%d",&s[k].priority);
-if(rear==SIZE-1)
-{
+ int i;
+ int k=0;
+ printf("enter the element\n");
+ scanf("%d",&s[k].data);
+ printf("enter the priority\n");
+ scanf("%d",&s[k].priority);
+ if(rear==SIZE-1)
+ {
 	printf("overflow");
-}
-else
-{
-if(rear==-1)
+ }
+ else
+ {
+        if(rear==-1)
 	{
 		rear=0;
 		front=0;
 	}
-else
+ else
 	{
 	  rear++;
 	}
@@ -37,38 +37,38 @@ else
 }
 void dequeue()
 {
-if(front==-1)
-{
-printf("underflow");
-}
-else
-{
-printf("deleted=%d",arr[front]);
-}
-if(front==rear)
-{
-front=-1;
-rear=-1;
-}
-else
-{
-front++;
-}
-}
+  if(front==-1)
+  {
+  printf("underflow");
+  }
+  else
+ {
+  printf("deleted=%d",arr[front]);
+ }
+ if(front==rear)
+ {
+   front=-1;
+   rear=-1;
+ }
+ else
+ {
+   front++;
+ }
+ }
 void display()
 {
-int i,j,temp;
-for(i=front;i<=rear;i++)
-{
-for(j=front+1;j<=rear;j++)
-{
-if(s[i].priority<s[j].priority)
-{
- temp=arr[i];
- arr[i]=arr[j];
- arr[j]=temp;
-}
-}
+ int i,j,temp;
+   for(i=front;i<=rear;i++)
+   {
+     for(j=front+1;j<=rear;j++)
+   {
+   if(s[i].priority<s[j].priority)
+   {
+      temp=arr[i];
+      arr[i]=arr[j];
+      arr[j]=temp;
+   }
+  }
 }
 
 	printf("the priority queue is\n");
