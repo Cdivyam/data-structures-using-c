@@ -9,7 +9,8 @@ int priority;
 }s[SIZE];
 void enqueue()
 {
-int i,j,k=0;
+int i;
+int k=0;
 printf("enter the element\n");
 scanf("%d",&s[k].data);
 printf("enter the priority\n");
@@ -28,9 +29,10 @@ if(rear==-1)
 else
 	{
 	  rear++;
-	  }
+	}
 	  arr[rear]=s[k].data;
 	}
+	k++;
 
 }
 void dequeue()
@@ -60,7 +62,7 @@ for(i=front;i<=rear;i++)
 {
 for(j=front+1;j<=rear;j++)
 {
-if(s[i].priority>s[j].priority)
+if(s[i].priority<s[j].priority)
 {
  temp=arr[i];
  arr[i]=arr[j];
@@ -79,12 +81,14 @@ void main()
 {
 	int ch;
 	clrscr();
+	 printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
 	do
 	 {
-	   printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
+	  // printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
 	   printf("enter your choice\n");
 	   scanf("%d",&ch);
-	 switch(ch)
+
+	switch(ch)
 	 {
 	   case 1:enqueue();
 	   break;
