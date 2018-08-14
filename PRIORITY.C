@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<conio.h>
 # define SIZE 5
-int arr[SIZE],front=-1,rear=-1;
+int front=-1,rear=-1;
 struct prior
 {
  int data;
@@ -9,19 +9,19 @@ struct prior
 }s[SIZE];
 void enqueue()
 {
- int i;
- int k=0;
+ int i,data,pri;
  printf("enter the element\n");
- scanf("%d",&s[k].data);
+ scanf("%d",&data);
+
  printf("enter the priority\n");
- scanf("%d",&s[k].priority);
+ scanf("%d",&pri);
  if(rear==SIZE-1)
  {
 	printf("overflow");
  }
  else
  {
-        if(rear==-1)
+	if(rear==-1)
 	{
 		rear=0;
 		front=0;
@@ -30,20 +30,32 @@ void enqueue()
 	{
 	  rear++;
 	}
-	  arr[rear]=s[k].data;
+	  s[rear].data=data;
+	  s[rear].priority=pri;
 	}
-	k++;
-
-}
+ }
 void dequeue()
 {
+ int i,j;struct prior temp;
+   for(i=front;i<=rear;i++)
+   {
+     for(j=front+1;j<=rear;j++)
+   {
+   if(s[i].priority<s[j].priority)
+   {
+      temp=s[i];
+      s[i]=s[j];
+      s[j]=temp;
+   }
+  }
+}
   if(front==-1)
   {
   printf("underflow");
   }
   else
  {
-  printf("deleted=%d",arr[front]);
+  printf("\n deleted=%d ",s[front].data);
  }
  if(front==rear)
  {
@@ -57,16 +69,16 @@ void dequeue()
  }
 void display()
 {
- int i,j,temp;
+ int i,j;struct prior temp;
    for(i=front;i<=rear;i++)
    {
      for(j=front+1;j<=rear;j++)
    {
    if(s[i].priority<s[j].priority)
    {
-      temp=arr[i];
-      arr[i]=arr[j];
-      arr[j]=temp;
+      temp=s[i];
+      s[i]=s[j];
+      s[j]=temp;
    }
   }
 }
@@ -74,7 +86,7 @@ void display()
 	printf("the priority queue is\n");
 	for(i=front;i<=rear;i++)
 	 {
-	    printf("%d ",arr[i]);
+	    printf(" \t %d ",s[i].data);
 	 }
 }
 void main()
@@ -87,8 +99,7 @@ void main()
 	  // printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
 	   printf("enter your choice\n");
 	   scanf("%d",&ch);
-
-	switch(ch)
+	 switch(ch)
 	 {
 	   case 1:enqueue();
 	   break;
@@ -103,4 +114,4 @@ void main()
 	 while(ch<=3);
 
 	getch();
-	}
+}
