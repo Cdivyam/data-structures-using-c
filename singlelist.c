@@ -31,7 +31,8 @@ void Insertt(int dat, int n)
 }
 void Print()
 {
-    struct Node* temp = head;
+    struct Node* temp ;
+    temp = head;
     printf("list is:");
     while(temp != NULL)
     {
@@ -56,11 +57,31 @@ void delte(int n){
     temp1->next = temp2->next;
     free(temp2);
 }
+void searchh(int n){
+    struct Node* temp3 = head;
+    int i=1;
+    if(head == NULL){
+        printf("linked list is empty");
+        return;
+    }
+    while(temp3!=NULL){
+        if((temp3->data)==n){
+
+            printf("element found at %d position",i++);
+            break;
+        }
+        else{
+            temp3=temp3->next;
+        }
+        i++;
+    }
+
+}
 int main()
  {
      head = NULL;
      printf("how many numbers?\n");
-     int n,i,x,a,x1;
+     int n,i,x,a,x1,s;
      scanf("%d",&n);
      for(i=0;i<n;i++){
         printf("enter the number \n");
@@ -85,5 +106,8 @@ int main()
       Insertt(x1,a);
       Print();
      }
+     printf("now search an element\n enter the element to be searched");
+     scanf("%d",&s);
+     searchh(s);
      printf("closes");
  }
