@@ -1,117 +1,121 @@
 #include<stdio.h>
-#include<conio.h>
-# define SIZE 5
-int front=-1,rear=-1;
-struct prior
-{
- int data;
- int priority;
-}s[SIZE];
-void enqueue()
-{
- int i,data,pri;
- printf("enter the element\n");
- scanf("%d",&data);
-
- printf("enter the priority\n");
- scanf("%d",&pri);
- if(rear==SIZE-1)
- {
-	printf("overflow");
- }
- else
- {
-	if(rear==-1)
-	{
-		rear=0;
-		front=0;
-	}
- else
-	{
-	  rear++;
-	}
-	  s[rear].data=data;
-	  s[rear].priority=pri;
-	}
- }
-void dequeue()
-{
- int i,j;struct prior temp;
-   for(i=front;i<=rear;i++)
-   {
-     for(j=front+1;j<=rear;j++)
-   {
-   if(s[i].priority<s[j].priority)
-   {
-      temp=s[i];
-      s[i]=s[j];
-      s[j]=temp;
-   }
-  }
-}
-  if(front==-1)
-  {
-  printf("underflow");
-  }
-  else
- {
-  printf("\n deleted=%d ",s[front].data);
- }
- if(front==rear)
- {
-   front=-1;
-   rear=-1;
- }
- else
- {
-   front++;
- }
- }
-void display()
-{
- int i,j;struct prior temp;
-   for(i=front;i<=rear;i++)
-   {
-     for(j=front+1;j<=rear;j++)
-   {
-   if(s[i].priority<s[j].priority)
-   {
-      temp=s[i];
-      s[i]=s[j];
-      s[j]=temp;
-   }
-  }
-}
-
-	printf("the priority queue is\n");
-	for(i=front;i<=rear;i++)
-	 {
-	    printf(" \t %d ",s[i].data);
-	 }
-}
+#include<stdlib.h>
+#define ms 10
+void insert (int x);
+void sort();
+void removes();
+void display();
+    int data[ms];
+    int priority[ms];
+    int front,rear;
+int n=0;
 void main()
 {
-	int ch;
-	clrscr();
-	 printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
-	do
-	 {
-	  // printf("\n1:Enqueue\n2:Dequeue\n3:Display\n4:Exit\n");
-	   printf("enter your choice\n");
-	   scanf("%d",&ch);
-	 switch(ch)
-	 {
-	   case 1:enqueue();
-	   break;
-	   case 2:dequeue();
-	   break;
-	   case 3:display();
-	   break;
-	   case 4:printf("exit");
-	   break;
-	 }
-	 }
-	 while(ch<=3);
-
-	getch();
+    int c,x;
+    front=rear=-1;
+    do
+    {
+        printf("\n\n*****MENU*****\n");
+        printf("1.insert in the queue\n");
+        printf("2.remove from queue\n");
+        printf("3.display the queue\n");
+        printf("Enter your choice \n");
+        scanf("%d",&c);
+        switch(c)
+        {
+            case 1:
+                printf("Enter the data element of the queue\n");
+                scanf("%d",&x);
+                insert(x);
+                break;
+            case 2:
+                removes();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                printf("Exiting....");break;
+            default:
+                printf("Invalid choice ");
+        }
+    }while(c!=4);
+}
+void insert(int x)
+{
+    if(abs(front-rear)==ms-1)
+    {
+        printf("Queue overflow \n");
+        return;
+    }
+    else
+    {
+        rear=(rear+1);
+        n++;
+        data[rear]=x;
+        printf("Enter the priority from 1 to 5 where 1 is the lowest \n");
+        scanf("%d",&priority[rear]);
+    }
+    sort();
+}
+void removes()
+{
+    int x,p;
+    if(rear==-1)
+    {
+        printf("Underflow...\n");
+        return;
+    }
+    else if(front==rear)
+    {
+        x=data[front];
+        p=priority[front];
+        front=rear=-1;
+        n--;
+    }
+    else
+    {
+        front=(front+1)%ms;
+        p=priority[front];
+        x=data[front];
+        n--;
+    }
+    printf("the element removed is %d and the priority is %d ",x,p);
+}
+void sort()
+{
+    int temp,i,j,p;
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(priority[j]<priority[j+1])
+            {
+                temp=data[j+1];
+                data[j+1]=data[j];
+                data[j]=temp;
+                p=priority[j+1];
+                priority[j+1]=priority[j];
+                priority[j]=p;
+            }
+        }
+    }
+}
+void display()
+{
+    int i;
+    if (front>rear)
+    {
+        for(i=front;i<ms;i++)
+            printf("%d and priority %d\n",data[i],priority[i]);
+        for(i=0;i<rear;i++)
+            printf("%d and priority %d\n",data[i],priority[i]);
+    }
+    else if(front<rear)
+    {
+        for(i=front;i<=rear;i++)
+        printf("%d and priority %d\n",data[i],priority[i]);
+    }
+    else
+        printf("%d and priority %d",data[front],priority[i]);
 }
