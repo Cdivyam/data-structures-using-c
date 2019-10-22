@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
+// node start
 struct Node {
     int data;
     struct Node* link;
 };
+// create top pointer
 struct Node* top ;
 void push(int x){
     struct Node* temp=(struct Node*)malloc(sizeof(struct Node));
